@@ -9,20 +9,21 @@ export class RecipeService{
   recipesChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [
-        new Recipe('test recipe','sample description', `https://www.metmuseum.org/-/media/images/visit/
+        new Recipe('Sample recipe','sample description', `https://www.metmuseum.org/-/media/images/visit/
         food-drink/the-eatery-ground-floor.jpg?h=960&w=1440&sc_lang=en&hash=3112A4CF79610CDD18D24E997DB975A6`,[
-          new Ingredient('Meat', 1),
+          new Ingredient('Chopped Meat', 1),
           new Ingredient('French Fries', 20),
-        ]),    
-        
-        new Recipe('test recipe 2','sample description', `https://www.metmuseum.org/-/media/images/visit/
-        food-drink/the-eatery-ground-floor.jpg?h=960&w=1440&sc_lang=en&hash=3112A4CF79610CDD18D24E997DB975A6`,[
           new Ingredient('Buns', 2),
-          new Ingredient('Lettuce', 1),
-        ])
+          new Ingredient('Tomatoe', 2),
+        ]),    
       ];
 
       constructor(private shoppingService: ShoppingListService){}
+
+      setRecipes(recipes: Recipe[]){
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+      }
 
       getRecipes(){
         return this.recipes.slice();
